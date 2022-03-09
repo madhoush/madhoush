@@ -13,6 +13,7 @@ for i=1:(r+p)
 end
 
 %SECTION2 : THERMODYNAMIC PARAMETERS
+R = 8.314;
 T0 = input('Enter reference temperature (K) \n');
 DH0 = input('Enter reaction enthalpy in reference temperature (j) \n');
 T = input('Enter the temperature that you want to calculate heat of reaction (K) \n');
@@ -91,11 +92,11 @@ GA = sum(st_co.*A);
 GB = sum(st_co.*B);
 GC = sum(st_co.*C);
 GD = sum(st_co.*D);
-DH_2 =(GA*(T-T0) + (GB/2)*(T^2 - T0^2) + (GC/3)*(T^3 - T0^3) + GD*((T-T0)/(T*T0)));
+DH_2 =R*(GA*(T-T0) + (GB/2)*(T^2 - T0^2) + (GC/3)*(T^3 - T0^3) + GD*((T-T0)/(T*T0)));
 DH = DH0 + DH_2;
 %TEMPERATURE THAT DH WILL EQUAL TO ZERO
 syms t
-f = (GA*(t-T0) + (GB/2)*(t^2 - T0^2) + (GC/3)*(t^3 - T0^3) + GD*((t-T0)/(t*T0)))+DH0==0;
+f = R*(GA*(t-T0) + (GB/2)*(t^2 - T0^2) + (GC/3)*(t^3 - T0^3) + GD*((t-T0)/(t*T0)))+DH0==0;
 T_ZERO = solve(f,t);
 
 %SECTION4 : RESULTS
